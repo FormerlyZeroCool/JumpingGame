@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class PowerUp 
@@ -5,6 +6,7 @@ public class PowerUp
 private int xPos,yPos,width,height;
 public final int HP=1,JUMP=2,JUMPPOISON=3,POISON=4,NOTHING=0;//status options
 private int powerUpStatus;
+private Color color;
 
 private Panel panel;
 public PowerUp(Panel p,int pStat)
@@ -12,6 +14,16 @@ public PowerUp(Panel p,int pStat)
 	double minXP,maxXP;
 	panel=p;
 	powerUpStatus=pStat;
+	if(pStat == HP)
+		color = Color.ORANGE;
+	else if(pStat == JUMP)
+		color = Color.CYAN;
+	else if (pStat == JUMPPOISON)
+		color = new Color(60,80,140);
+	else if (pStat == POISON)
+		color = new Color(120,60,140);
+	else
+		color = Color.ORANGE;
 	height=20;
 	width=20;
 	yPos=panel.getYPos()-height;
@@ -30,6 +42,7 @@ public Panel getPanel()
 }
 public void reDraw(Graphics g)
 {
+	g.setColor(color);
 	yPos=panel.getYPos()-height;
 	if(xPos+width>panel.getWidth()+panel.getXPos())//Keeps object on platform when it shrinks
 		xPos=panel.getWidth()+panel.getXPos()-width;
